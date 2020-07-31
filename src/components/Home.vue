@@ -3,20 +3,19 @@
     <div class="dropdown searchBox">
         <input
             class="dropdown-input"
-            v-model.trim="inputValue"
+            v-model.trim="filterText"
             type="text"
             style="width: 80%;"
             placeholder="Search Stocks"
         />
-        <div v-show="inputValue" class="dropdown-list">
+        <div v-show="filterText " class="dropdown-list">
           <div
-              v-show="itemVisible(item) && showList"
-              v-for="item in Stocknames"
+              v-for="item in filteredNames"
               :key="item.symbol"
-              @click="storeData(item)"
+              @click.prevent="storeData(item)"
               class="dropStocks"
           >
-            {{item.name}}: {{item.symbol}}
+            {{item.name || 'N/A'}}: ({{item.symbol}})
 
           </div>
         </div>
@@ -27,35 +26,28 @@
 </template>
 
 <script>
-import {stockNames} from "@/mixins/stockNames";
+import {stockMixin} from "@/mixins/stockMixin";
 
 export default {
   name: "Home",
-  mixins:[stockNames],
+  mixins:[stockMixin],
   data(){
     return{
       inputValue:'',
       stockName:'',
       stockSymbol:'',
-      showList: false
+      showList:true
     }
   },
   methods:{
-    itemVisible(item){
-      this.showList = true;
-      let name = item.name.toLowerCase();
-      let input = this.inputValue.toLowerCase();
-      return name.includes(input);
-    },
     storeData(item){
-
       this.stockName = item.name;
       this.stockSymbol = item.symbol;
-      this.inputValue = `${this.stockName} (${this.stockSymbol} )`;
+      this.filterText = `${this.stockName} (${this.stockSymbol} )`;
       this.showList = false;
     },
     clearData(){
-      this.inputValue = '';
+      this.filterText = '';
       this.stockName = '';
       this.stockSymbol = '';
     }
@@ -65,12 +57,21 @@ export default {
 
 <style scoped>
 .dropStocks{
-  background-color: aliceblue
+  background-color: aliceblue;
+  padding-left: 8px;
+
+
 }
 .dropStocks:hover{
   font-weight: bolder;
   background-color: #b3d7e5;
   cursor: pointer;
+  padding-left: 8px;
+}
+.dropdown-list{
+  height: 200px;
+  overflow: auto;
+  width:80%
 }
 .searchBox{
   margin-top:30px

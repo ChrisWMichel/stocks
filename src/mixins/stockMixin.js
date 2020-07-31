@@ -1,13 +1,22 @@
-export const stockNames = {
-    /*computed: {
+export const stockMixin = {
+    computed: {
         filteredNames() {
-            if(this.stockNames){
-                return this.stockNames.filter(elm => {
-                    return elm.name.match(this.filterText)
-                })
-            }
+            return this.Stocknames.filter(elm => {
+                return (
+                    elm.name.match(this.filterText.toUpperCase()),
+                    elm.symbol.match(this.filterText.toUpperCase())
+                )
+            })
         }
-    },*/
+        /*filteredNames() {
+            return this.Stocknames.filter(elm => {
+                return Object.values(elm).map(m =>{
+                    return [m.name, m.symbol]
+                })
+            })
+        }*/
+
+    },
     data() {
         return {
             filterText:'',
