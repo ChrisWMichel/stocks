@@ -1,79 +1,85 @@
 <template>
   <div>
     <div class="dropdown searchBox">
-        <input
-            class="dropdown-input"
-            v-model.trim="filterText"
-            type="text"
-            style="width: 80%;"
-            placeholder="Search Stocks"
-        />
-        <div v-show="filterText " class="dropdown-list">
-          <div
-              v-for="item in filteredNames"
-              :key="item.symbol"
-              @click.prevent="storeData(item)"
-              class="dropStocks"
-          >
-            {{item.name || 'N/A'}}: ({{item.symbol}})
-
-          </div>
+      <input
+        class="dropdown-input"
+        v-model.trim="filterText"
+        type="text"
+        style="width: 30%;"
+        placeholder="Search Stocks"
+      />
+      <div v-show="filterText" class="dropdown-list">
+        <div
+          v-for="item in filteredNames"
+          :key="item.symbol"
+          @click.prevent="storeData(item)"
+          class="dropStocks"
+        >
+          {{ item.name || "N/A" }}: ({{ item.symbol }})
         </div>
-     <!-- <button size="sm" text="Button" class="" @click="clearData">Clear</button>-->
       </div>
-
+      <!-- <button size="sm" text="Button" class="" @click="clearData">Clear</button>-->
+    </div>
+    <div class="chart">
+      <Chart />
+    </div>
   </div>
 </template>
 
 <script>
-import {stockMixin} from "@/mixins/stockMixin";
+import { stockMixin } from "@/mixins/stockMixin";
+import Chart from "./Chart";
 
 export default {
   name: "Home",
-  mixins:[stockMixin],
-  data(){
-    return{
-      inputValue:'',
-      stockName:'',
-      stockSymbol:'',
-      showList:true
-    }
+  components: {
+    Chart,
   },
-  methods:{
-    storeData(item){
+  mixins: [stockMixin],
+  data() {
+    return {
+      inputValue: "",
+      stockName: "",
+      stockSymbol: "",
+      showList: true,
+    };
+  },
+  methods: {
+    storeData(item) {
       this.stockName = item.name;
       this.stockSymbol = item.symbol;
       this.filterText = `${this.stockName} (${this.stockSymbol} )`;
       this.showList = false;
     },
-    clearData(){
-      this.filterText = '';
-      this.stockName = '';
-      this.stockSymbol = '';
-    }
-  }
-}
+    clearData() {
+      this.filterText = "";
+      this.stockName = "";
+      this.stockSymbol = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
-.dropStocks{
+.dropStocks {
   background-color: aliceblue;
   padding-left: 8px;
-
-
 }
-.dropStocks:hover{
+.dropStocks:hover {
   font-weight: bolder;
   background-color: #b3d7e5;
   cursor: pointer;
   padding-left: 8px;
 }
-.dropdown-list{
+.dropdown-list {
   height: 200px;
   overflow: auto;
-  width:80%
+  width: 30%;
 }
-.searchBox{
-  margin-top:30px
+.searchBox {
+  margin-top: 30px;
+}
+.chart {
+  margin-top: 30px;
 }
 </style>
