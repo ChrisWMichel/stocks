@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <!--<b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -11,7 +11,7 @@
           <b-nav-item href="#" disabled>Disabled</b-nav-item>
         </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
+        &lt;!&ndash; Right aligned nav items &ndash;&gt;
         <b-navbar-nav class="ml-auto">
           <b-nav-form>
             <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
@@ -26,7 +26,7 @@
           </b-nav-item-dropdown>
 
           <b-nav-item-dropdown right>
-            <!-- Using 'button-content' slot -->
+            &lt;!&ndash; Using 'button-content' slot &ndash;&gt;
             <template v-slot:button-content>
               <em>User</em>
             </template>
@@ -35,7 +35,7 @@
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
-    </b-navbar>
+    </b-navbar>-->
     <b-container>
       <app-home></app-home>
     </b-container>
