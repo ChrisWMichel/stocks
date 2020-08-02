@@ -62,17 +62,20 @@ export default {
       // } catch (err){
       //   console.log('error', err)
       // }
-      axios
-        .get(
-          `https://financialmodelingprep.com/api/v3/quote/${this.$store.state.symbol}?apikey=5503a1b348b0456c2d0c3c33b375d977`
-        )
-        .then((res) => {
-          vm.financialData = res.data;
-        });
-
+      try {
+        await axios
+          .get(
+            `https://financialmodelingprep.com/api/v3/quote/${this.$store.state.symbol}?apikey=5503a1b348b0456c2d0c3c33b375d977`
+          )
+          .then((res) => {
+            this.financialData = res.data[0];
+          });
+      } catch (err) {
+        console.log("error", err);
+      }
       this.$store.state.clearDataObj = false;
       console.log("financialData", this.financialData);
-      this.$store.state.stockPrice = this.financialData[0].price;
+      this.$store.state.stockPrice = this.financialData.price;
     },
   },
 };
