@@ -1,34 +1,28 @@
 <template>
   <div>
-      <div v-if="stockSym">
-        {{updateStocks()}}
+    <div v-if="stockSym">
+      {{ updateStocks() }}
       <vue-trading-view
-          :options="{
-            symbol: stockSym,
-        theme: 'light',
-        interval: 'D',
-        width: 1000,
-        allow_symbol_change: true,
-          }"
+        :options="{
+          symbol: stockSym,
+          theme: 'light',
+          interval: 'D',
+          width: 1000,
+          allow_symbol_change: true,
+        }"
       ></vue-trading-view>
-      </div>
+    </div>
 
     <div>
       <analysis :financeData="financialData"></analysis>
-
-
     </div>
   </div>
 </template>
 
 <script>
-
-
-
-
 import VueTradingView from "vue-trading-view";
 import Analysis from "@/components/Analysis";
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "Chart",
@@ -37,44 +31,49 @@ export default {
     VueTradingView,
   },
   //props:['clearDataObj'],
-  data(){
-    return{
-      url:'',
-      stockPrice:this.$store.state.stockPrice,
-      financialData:{}
-    }
-
+  data() {
+    return {
+      url: "",
+      stockPrice: this.$store.state.stockPrice,
+      financialData: {},
+    };
   },
-  computed:{
-    stockSym(){
-      return this.$store.state.symbol
-    }
+  computed: {
+    stockSym() {
+      return this.$store.state.symbol;
+    },
   },
-  methods:{
-   async updateStocks(){
-      console.log('clearData', this.$store.state.clearDataObj)
-      if(!this.$store.state.clearDataObj){
-        return
+  methods: {
+    async updateStocks() {
+      console.log("clearData", this.$store.state.clearDataObj);
+      if (!this.$store.state.clearDataObj) {
+        return;
       }
       const vm = this;
-      const unirest = require('unirest');
-     const API_KEY = "1db6b9ba8amsh9cc23089d055ba9p13a441jsna126072d3c8b";
-      try {
-       await unirest.get(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-analysis?symbol=${this.$store.state.symbol}`)
-            .header("X-RapidAPI-Host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
-            .header("X-RapidAPI-Key", API_KEY)
-            .end(function (result) {
-              vm.financialData =  result.body.financialData
-            });
-      } catch (err){
-        console.log('error', err)
-      }
-
+      const unirest = require("unirest");
+      const API_KEY = "1db6b9ba8amsh9cc23089d055ba9p13a441jsna126072d3c8b";
+      // try {
+      //  await unirest.get(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-analysis?symbol=${this.$store.state.symbol}`)
+      //       .header("X-RapidAPI-Host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
+      //       .header("X-RapidAPI-Key", API_KEY)
+      //       .end(function (result) {
+      //         vm.financialData =  result.body.financialData
+      //       });
+      // } catch (err){
+      //   console.log('error', err)
+      // }
+      axios
+        .get(
+          `https://financialmodelingprep.com/api/v3/quote/${this.$store.state.symbol}?apikey=5503a1b348b0456c2d0c3c33b375d977`
+        )
+        .then((res) => {
+          vm.financialData = res.data;
+        });
 
       this.$store.state.clearDataObj = false;
-      console.log('financialData', this.financialData)
-      this.$store.state.stockPrice = this.financialData.currentPrice.raw;
-    }
-  }
+      console.log("financialData", this.financialData);
+      this.$store.state.stockPrice = this.financialData[0].price;
+    },
+  },
 };
 </script>
