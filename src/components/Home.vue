@@ -31,14 +31,7 @@
       </b-col>
 
     </b-row>
-      <chart
-          class="chart"
-
-
-      ></chart>
-<!--:stockSymbol="stockSymbol"
-
-@getStockPrice="stockPrice = $event"-->
+      <chart class="chart" :clearDataObj="clearData"></chart>
   </b-container>
 </template>
 
@@ -56,7 +49,8 @@ export default {
     return {
       stockName: "",
       stockSymbol: "",
-      showList: true
+      showList: true,
+      clearDataObj: false
 
     };
   },
@@ -64,12 +58,11 @@ export default {
     storeData(item) {
 
       this.$store.state.symbol = item.symbol;
-      console.log('item', item.symbol);
-     // console.log('store', this.$store.state.symbol);
       this.stockName = item.name;
       this.stockSymbol = item.symbol;
       this.filterText = `${this.stockName} (${this.stockSymbol} )`;
       this.showList = false;
+      this.clearDataObj = true;
 
     },
     clearData() {

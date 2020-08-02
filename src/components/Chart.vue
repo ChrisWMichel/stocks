@@ -2,12 +2,13 @@
   <div>
       <div v-if="stockSym">
         {{updateStocks()}}
-       <!-- <h3>Symbol: {{stockSym}}</h3>-->
-
       <vue-trading-view
           :options="{
             symbol: stockSym,
-            theme: 'light'
+        theme: 'light',
+        interval: 'D',
+        width: 1000,
+        allow_symbol_change: ture,
           }"
       ></vue-trading-view>
       </div>
@@ -35,6 +36,7 @@ export default {
     Analysis,
     VueTradingView,
   },
+  props:['clearData'],
   data(){
     return{
       url:'',
@@ -51,6 +53,9 @@ export default {
   },
   methods:{
     updateStocks(){
+      if(!this.clearData){
+        return
+      }
       const vm = this;
       const unirest = require('unirest');
       const API_KEY = "56ed08883fmsh85f6cf789654c75p1d540cjsn8c0df248e1ae";
