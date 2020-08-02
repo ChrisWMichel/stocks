@@ -77,6 +77,7 @@ export default {
       this.stockName = "";
       this.stockSymbol = "";
       this.$store.state.symbol = "";
+      this.$store.state.stockPrice = 0;
     }
   },
   computed:{
