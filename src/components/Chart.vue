@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="stockSym">
-      {{ updateStocks() }}
+      <!-- {{ updateStocks() }} -->
       <vue-trading-view
         :options="{
           symbol: stockSym,
