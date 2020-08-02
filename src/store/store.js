@@ -7,7 +7,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state:{
         symbol:'',
-        stockPrice:0
+        stockPrice:0,
+        clearDataObj: true
     },
     getters:{
 

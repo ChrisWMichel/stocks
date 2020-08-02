@@ -31,7 +31,7 @@
       </b-col>
 
     </b-row>
-      <chart class="chart" :clearDataObj="clearData"></chart>
+      <chart class="chart"></chart>
   </b-container>
 </template>
 
@@ -49,8 +49,7 @@ export default {
     return {
       stockName: "",
       stockSymbol: "",
-      showList: true,
-      clearDataObj: false
+      showList: true
 
     };
   },
@@ -62,8 +61,6 @@ export default {
       this.stockSymbol = item.symbol;
       this.filterText = `${this.stockName} (${this.stockSymbol} )`;
       this.showList = false;
-      this.clearDataObj = true;
-
     },
     clearData() {
       this.filterText = "";
@@ -71,6 +68,7 @@ export default {
       this.stockSymbol = "";
       this.$store.state.symbol = "";
       this.$store.state.stockPrice = 0;
+      this.$store.state.clearDataObj = true;
     }
   },
   computed:{
