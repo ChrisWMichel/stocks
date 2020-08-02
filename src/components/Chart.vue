@@ -65,6 +65,7 @@ export default {
           .end(function (result) {
             vm.financialData =  result.body.financialData
           });
+      this.clearData = false;
       this.$store.state.stockPrice = this.financialData.currentPrice.raw;
     }
   }
