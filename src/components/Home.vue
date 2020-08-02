@@ -1,37 +1,37 @@
 <template>
-  <b-container >
-    <b-row class="dropdown searchBox" style="margin-left: 12%"><!--class="justify-content-md-center"-->
+  <b-container>
+    <b-row class="dropdown searchBox" style="margin-left: 12%"
+      ><!--class="justify-content-md-center"-->
       <b-col cols="7" lg="7" md="5" sm="7" style="padding-right: 0">
         <input
-            class="dropdown-input"
-            v-model.trim="filterText"
-            type="text"
-            style="width: 100%;"
-            placeholder="Search Stocks"
+          class="dropdown-input"
+          v-model.trim="filterText"
+          type="text"
+          style="width: 100%;"
+          placeholder="Search Stocks"
         />
         <div class="text-center">
           <small>Click the 'Clear' button for new search</small>
         </div>
         <div v-show="filterText" class="dropdown-list">
           <div
-              v-for="item in filteredNames"
-              :key="item.symbol"
-              @click.prevent="storeData(item)"
-              class="dropStocks"
+            v-for="item in filteredNames"
+            :key="item.symbol"
+            @click.prevent="storeData(item)"
+            class="dropStocks"
           >
             {{ item.name || "N/A" }}: ({{ item.symbol }})
           </div>
         </div>
       </b-col>
       <b-col cols="1" style="padding: 0">
-        <button size="sm"  class="" @click="clearData">Clear</button>
+        <button size="sm" class="" @click="clearData">Clear</button>
       </b-col>
-      <b-col cols="4" style="padding-left: 5%" class="top-label" >
-        {{ getSockPrice || 0 | currency}}
+      <b-col cols="4" style="padding-left: 5%" class="top-label">
+        {{ getSockPrice || 0 | currency }}
       </b-col>
-
     </b-row>
-      <chart class="chart"></chart>
+    <chart class="chart"></chart>
   </b-container>
 </template>
 
@@ -40,7 +40,7 @@ import { stockMixin } from "@/mixins/stockMixin";
 import Chart from "./Chart";
 
 export default {
-  name: "Home",
+  // name: "Home",
   components: {
     Chart,
   },
@@ -49,13 +49,11 @@ export default {
     return {
       stockName: "",
       stockSymbol: "",
-      showList: true
-
+      showList: true,
     };
   },
   methods: {
     storeData(item) {
-
       this.$store.state.symbol = item.symbol;
       this.stockName = item.name;
       this.stockSymbol = item.symbol;
@@ -69,23 +67,23 @@ export default {
       this.$store.state.symbol = "";
       this.$store.state.stockPrice = 0;
       this.$store.state.clearDataObj = true;
-    }
+    },
   },
-  computed:{
-    getSockPrice(){
-      return this.$store.state.stockPrice
-    }
+  computed: {
+    getSockPrice() {
+      return this.$store.state.stockPrice;
+    },
   },
   filters: {
-    currency: function (value) {
-      let formatter = Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-        minimumFractionDigits: 2
+    currency: function(value) {
+      let formatter = Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
       });
       return formatter.format(value);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -99,7 +97,6 @@ export default {
   background-color: #b3d7e5;
   cursor: pointer;
   padding-left: 8px;
-
 }
 .dropdown-list {
   height: 200px;
@@ -118,7 +115,7 @@ export default {
   margin-top: 30px;
   position: relative;
 }
-.top-label{
+.top-label {
   font-weight: bold;
   font-size: 20px;
 }

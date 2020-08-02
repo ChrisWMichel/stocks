@@ -56,34 +56,24 @@ export default {
       if(!this.$store.state.clearDataObj){
         return
       }
-     /*  const vm = this;
+      const vm = this;
       const unirest = require('unirest');
      const API_KEY = "1db6b9ba8amsh9cc23089d055ba9p13a441jsna126072d3c8b";
-     try {
+      try {
        await unirest.get(`https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-analysis?symbol=${this.$store.state.symbol}`)
             .header("X-RapidAPI-Host", "apidojo-yahoo-finance-v1.p.rapidapi.com")
             .header("X-RapidAPI-Key", API_KEY)
             .end(function (result) {
-              console.log('result', result)
               vm.financialData =  result.body.financialData
             });
       } catch (err){
         console.log('error', err)
-      }*/
-     try {
-       await axios.get(
-           `https://financialmodelingprep.com/api/v3/quote/${this.$store.state.symbol}?apikey=5503a1b348b0456c2d0c3c33b375d977`
-       )
-           .then((res) => {
-             this.financialData = res.data[0];
-           });
-     } catch (err){
-       console.log('error', err)
-     }
+      }
 
-     this.$store.state.clearDataObj = false;
-     console.log("financialData", this.financialData);
-     this.$store.state.stockPrice = this.financialData.price;
+
+      this.$store.state.clearDataObj = false;
+      console.log('financialData', this.financialData)
+      this.$store.state.stockPrice = this.financialData.currentPrice.raw;
     }
   }
 };
