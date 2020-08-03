@@ -7,11 +7,10 @@ import store from './store/store'
 import { BootstrapVue, IconsPlugin, LayoutPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import "@/plugins/echarts"
-import unirest from 'unirest'
+import "@/plugins/echarts";
+
 
 Vue.use(BootstrapVue, LayoutPlugin, IconsPlugin);
-Vue.use(unirest);
 
 Vue.config.productionTip = false
 
