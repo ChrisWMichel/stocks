@@ -1,6 +1,7 @@
 <template>
   <div>
     <div v-if="stockSym">
+      {{ updateStocks() }}
       <VueTradingView
         :options="{
           symbol: stockSym,
@@ -56,6 +57,7 @@ export default {
           )
           .then((res) => {
             this.financialData = res.data;
+            console.log("====>>>>>>>", res.data);
           });
       } catch (err) {
         console.log("error", err);
