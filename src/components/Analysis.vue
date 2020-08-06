@@ -37,11 +37,11 @@
             </b-tr>
             <b-tr>
               <b-th class="text-center">MACD:</b-th>
-              <b-th class="text-left">{{ macd }}</b-th>
+              <b-th class="text-left">{{ macdData }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">VOLUME:</b-th>
-              <b-th class="text-left">{{ volume }}</b-th>
+              <b-th class="text-left">{{ volumeData }}</b-th>
             </b-tr>
           </b-tbody>
         </b-table-simple>
@@ -82,7 +82,12 @@
 <script>
 export default {
   name: "Analysis",
-  props: { financeData: String, rsiData: String },
+  props: {
+    financeData: String,
+    rsiData: String,
+    macdData: String,
+    volumeData: String,
+  },
   data() {
     return {
       description:

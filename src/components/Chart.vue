@@ -15,7 +15,12 @@
     </div>
 
     <div>
-      <analysis :financeData="band" :rsiData="rsiData"></analysis>
+      <analysis
+        :financeData="band"
+        :rsiData="rsiData"
+        :macdData="macdData"
+        :volumeData="volumeData"
+      ></analysis>
     </div>
   </div>
 </template>
@@ -43,6 +48,10 @@ export default {
       band: "",
       rsi: "",
       rsiData: "",
+      macd: "",
+      macdData: "",
+      volume: "",
+      volumeData: "",
     };
   },
   computed: {
@@ -68,16 +77,24 @@ export default {
             axios.get(
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
+            axios.get(
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=6m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+            ),
+            axios.get(
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=6m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+            ),
           ])
           .then(
-            axios.spread((res1, res2, res3) => {
+            axios.spread((res1, res2, res3, res4, res5) => {
               this.financialData = res1;
               this.$store.state.stockPrice = this.financialData.data.latestPrice;
               this.bandData = res2.data.indicator;
               this.upperBand = this.bandData[2].slice(-1).pop();
               this.lowerBand = this.bandData[0].slice(-1).pop();
               this.rsi = res3.data.indicator[0].slice(-1).pop();
-              console.log("==>>", this.rsi);
+              this.macd = res4.data.indicator[0].slice(-1).pop();
+              this.volume = res5.data.indicator[0].slice(-1).pop();
+              // console.log("==>>", this.volume);
             })
           );
       } catch (err) {
@@ -102,6 +119,19 @@ export default {
         this.rsiData = "BULLISH";
       } else if (35 < this.rsi && 70 > this.rsi) {
         this.rsiData = "NEUTRAL";
+      }
+      //MACD if-then statements
+      if (this.macd > 0) {
+        this.macdData = "BULLISH";
+      } else if (this.macd < 0) {
+        this.macdData = "BEARISH";
+        console.log("===>", this.macdData);
+      }
+      //Volume if-then statements
+      if (this.$store.state.stockPrice > this.volume) {
+        this.volumeData = "BULLISH";
+      } else if (this.$store.state.stockPrice < this.volume) {
+        this.volumeData = "BEARISH";
       }
       this.forceUpdate();
     },
