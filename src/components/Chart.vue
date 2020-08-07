@@ -93,6 +93,9 @@ export default {
             axios.get(
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
+            axios.get(
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=sk_9fea5a3a643e4dc3b771899b3a642177`
+            ),
           ])
           .then(
             axios.spread((res1, res2, res3, res4, res5, res6) => {
