@@ -52,6 +52,13 @@ export default {
       macdData: "",
       volume: "",
       volumeData: "",
+      priceData: {},
+      highData: {},
+      highPrice: 0,
+      lowData: {},
+      lowPrice: 0,
+      HV: 0,
+      EM: 0,
     };
   },
   computed: {
@@ -83,9 +90,12 @@ export default {
             axios.get(
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=6m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
+            axios.get(
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=sk_9fea5a3a643e4dc3b771899b3a642177`
+            ),
           ])
           .then(
-            axios.spread((res1, res2, res3, res4, res5) => {
+            axios.spread((res1, res2, res3, res4, res5, res6) => {
               this.financialData = res1;
               this.$store.state.stockPrice = this.financialData.data.latestPrice;
               this.bandData = res2.data.indicator;
@@ -94,7 +104,21 @@ export default {
               this.rsi = res3.data.indicator[0].slice(-1).pop();
               this.macd = res4.data.indicator[0].slice(-1).pop();
               this.volume = res5.data.indicator[0].slice(-1).pop();
-              // console.log("==>>", this.volume);
+              this.priceData = res6.data;
+              this.highData = this.priceData.map((ele) => {
+                return ele.high;
+              });
+              this.highPrice = Math.max.apply(Math, this.highData);
+              this.lowData = this.priceData.map((ele) => {
+                return ele.low;
+              });
+              this.lowPrice = Math.min.apply(Math, this.lowData);
+              this.HV =
+                (this.highPrice - this.lowPrice) /
+                ((this.highPrice + this.lowPrice) / 2);
+              this.EM =
+                this.$store.state.stockPrice * this.HV * Math.sqrt(5 / 253);
+              // console.log("====================>>", this.EM);
             })
           );
       } catch (err) {
@@ -133,7 +157,7 @@ export default {
       } else if (this.$store.state.stockPrice < this.volume) {
         this.volumeData = "BEARISH";
       }
-      this.forceUpdate();
+      // this.forceUpdate();
     },
   },
 };
