@@ -50,19 +50,19 @@
           <b-tbody>
             <b-tr>
               <b-th class="text-center">PRICE TO EARNINGS:</b-th>
-              <b-th class="text-left pr-5 pr-lg-0">{{ priceToEarnings }}</b-th>
+              <b-th class="text-left pr-5 pr-lg-0">{{ this.pe }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">EBITDA RATING:</b-th>
-              <b-th class="text-left">{{ ebitdaRating }}</b-th>
+              <b-th class="text-left">{{ this.ebit }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">PRICE TO BOOK RATIO:</b-th>
-              <b-th class="text-left">{{ priceToBookRatio }}</b-th>
+              <b-th class="text-left">{{ this.pb }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">PROFIT MARGIN:</b-th>
-              <b-th class="text-left">{{ profitMargin }}</b-th>
+              <b-th class="text-left">{{ this.pm }}</b-th>
             </b-tr>
           </b-tbody>
         </b-table-simple>
@@ -80,10 +80,6 @@ export default {
   data() {
     return {
       description: this.shortData,
-      priceToEarnings: "GOOD",
-      ebitdaRating: "FAIR",
-      priceToBookRatio: "GOOD",
-      profitMargin: "LOW",
     };
   },
   computed: {
@@ -95,6 +91,10 @@ export default {
       volumeData: "getVolumeData",
       macdData: "getMacdData",
       shortData: "getShortData",
+      pe: "getPe",
+      pb: "getPb",
+      pm: "getPm",
+      ebit: "getEbit",
     }),
   },
   methods: {},

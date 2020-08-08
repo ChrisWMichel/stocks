@@ -62,7 +62,17 @@ export default {
     stockSym() {
       return this.$store.state.symbol;
     },
-    ...mapActions(["band", "rsidata", "volumeData", "macdData", "shortData"]),
+    ...mapActions([
+      "band",
+      "rsidata",
+      "volumeData",
+      "macdData",
+      "shortData",
+      "pe",
+      "pb",
+      "pm",
+      "ebit",
+    ]),
     ...mapGetters({
       choppiness: "getChoppiness",
       chopPct: "getChopPct",
@@ -72,6 +82,10 @@ export default {
       macdData: "getMacdData",
       stockPrice: "getStockPrice",
       shortData: "getShortData",
+      pe: "getPe",
+      pb: "getPb",
+      pm: "getPm",
+      ebit: "getEbit",
     }),
   },
   methods: {
@@ -111,8 +125,6 @@ export default {
               this.bandData = res2.data.indicator;
               this.upperBand = this.bandData[2].slice(-1).pop();
               this.lowerBand = this.bandData[0].slice(-1).pop();
-              console.log("upperBand==>>", this.upperBand);
-              console.log("lowerBand==>>", this.lowerBand);
               this.rsi = res3.data.indicator[0].slice(-1).pop();
               this.macd = res4.data.indicator[0].slice(-1).pop();
               this.volume = res5.data.indicator[0].slice(-1).pop();
@@ -234,6 +246,10 @@ export default {
         this.$store.state.shortData =
           "This stock is currently at a great place to dip buy. This stock typically trends well so this is a great opportunity to get the stock at a great price.";
       }
+      this.$store.state.pe = "GOOD";
+      this.$store.state.ebit = "FAIR";
+      this.$store.state.pb = "GOOD";
+      this.$store.state.pm = "LOW";
     },
     startSetInterval() {
       setInterval(() => {

@@ -16,6 +16,10 @@ const store = new Vuex.Store({
     volumeData: "",
     macdData: "",
     shortData: "",
+    pm: "",
+    pb: "",
+    pe: "",
+    ebit: "",
   },
   getters: {
     getChoppiness: (state) => state.choppiness,
@@ -30,6 +34,10 @@ const store = new Vuex.Store({
     getStockPrice: (state) => state.stockPrice,
     getClearDataObject: (state) => state.clearDataObj,
     getUpperBand: (state) => state.upperBand,
+    getPm: (state) => state.pm,
+    getPb: (state) => state.pb,
+    getPe: (state) => state.pe,
+    getEbit: (state) => state.ebit,
   },
   mutations: {
     calcChoppiness(state, payload) {
