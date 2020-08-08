@@ -85,16 +85,16 @@ export default {
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/quote?token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/bbands?range=1m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/bbands?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=6m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=6m&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=sk_9fea5a3a643e4dc3b771899b3a642177`
@@ -137,6 +137,7 @@ export default {
         console.log("error", err);
       }
       this.$store.state.clearDataObj = false;
+      // Trending Band if-then statements
       if (this.stockPrice > this.upperBand) {
         this.$store.state.band = "BULLISH";
       } else if (this.stockPrice < this.lowerBand) {
