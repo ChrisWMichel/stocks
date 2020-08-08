@@ -7,7 +7,7 @@
     </b-row>
     <b-row>
       <b-col class="pr-5 pl-5">
-        <h5 class="mx-5">{{ this.shortData }}</h5>
+        <h5 class="mx-lg-5 mx-0">{{ this.shortData }}</h5>
       </b-col>
     </b-row>
     <b-row style="display: flex;" class="pt-5 pb-5">
@@ -50,7 +50,7 @@
           <b-tbody>
             <b-tr>
               <b-th class="text-center">PRICE TO EARNINGS:</b-th>
-              <b-th class="text-left pr-5 pr-lg-0">{{ this.pe }}</b-th>
+              <b-th class="text-left pr-4 pr-md-5 pr-lg-0">{{ this.pe }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">EBITDA RATING:</b-th>

@@ -12,7 +12,6 @@
           interval: 'D',
           width: '100%',
           allow_symbol_change: true,
-          studies: ['BB@tv-basicstudies'],
         }"
       ></vue-trading-view>
     </div>
@@ -127,8 +126,8 @@ export default {
               this.financialData = res1;
               this.$store.state.stockPrice = this.financialData.data.latestPrice;
               this.bandData = res2.data.indicator;
-              this.upperBand = this.bandData[2].slice(-1).pop();
-              this.lowerBand = this.bandData[0].slice(-1).pop();
+              // this.upperBand = this.bandData[2].slice(-1).pop();
+              // this.lowerBand = this.bandData[0].slice(-1).pop();
               this.rsi = res3.data.indicator[0].slice(-1).pop();
               this.macd = res4.data.indicator[0].slice(-1).pop();
               this.volume = res5.data.indicator[0].slice(-1).pop();
@@ -147,7 +146,9 @@ export default {
                 ((this.highPrice + this.lowPrice) / 2);
               this.EM =
                 this.$store.state.stockPrice * this.HV * Math.sqrt(5 / 253);
-              this.midLine = this.upperBand - this.EM;
+              this.midLine = res5.data.indicator[0].slice(-1).pop();
+              this.upperBand = this.midLine + this.EM;
+              this.upperBand = this.midLine - this.EM;
               this.devHigh = this.midLine + 4 * this.EM;
               this.devLow = this.midLine - 4 * this.EM;
               this.peRatio = res7.data.peRatio;
