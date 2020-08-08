@@ -56,6 +56,10 @@ export default {
       midLine: 0,
       devHigh: 0,
       devLow: 0,
+      profitMargin: 0,
+      priceToBook: 0,
+      EBITDA: 0,
+      peRatio: 0,
     };
   },
   computed: {
@@ -119,7 +123,7 @@ export default {
             ),
           ])
           .then(
-            axios.spread((res1, res2, res3, res4, res5, res6) => {
+            axios.spread((res1, res2, res3, res4, res5, res6, res7) => {
               this.financialData = res1;
               this.$store.state.stockPrice = this.financialData.data.latestPrice;
               this.bandData = res2.data.indicator;
@@ -146,6 +150,11 @@ export default {
               this.midLine = this.upperBand - this.EM;
               this.devHigh = this.midLine + 4 * this.EM;
               this.devLow = this.midLine - 4 * this.EM;
+              this.peRatio = res7.data.peRatio;
+              this.EBITDA = res7.data.EBITDA;
+              this.priceToBook = res7.data.priceToBook;
+              this.profitMargin = res7.data.profitMargin;
+              console.log("========>>>>>>", this.EBITDA);
             })
           );
       } catch (err) {
