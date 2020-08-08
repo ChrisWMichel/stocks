@@ -1,8 +1,8 @@
 <template>
   <b-container>
-    <b-row class="dropdown searchBox" style="margin-left: 25%"
+    <b-row class="dropdown searchBox" style="justify-content: center"
       ><!--class="justify-content-md-center"-->
-      <b-col cols="8" lg="7" md="5" sm="7" style="padding-right: 0">
+      <b-col cols="8" lg="9" md="9" sm="9" style="padding-right: 0">
         <auto-search @getStock="getStock"></auto-search>
       </b-col>
     </b-row>

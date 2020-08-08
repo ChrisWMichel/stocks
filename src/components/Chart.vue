@@ -12,6 +12,7 @@
           interval: 'D',
           width: '100%',
           allow_symbol_change: true,
+          studies: ['BB@tv-basicstudies'],
         }"
       ></vue-trading-view>
     </div>
