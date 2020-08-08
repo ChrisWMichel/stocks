@@ -111,6 +111,8 @@ export default {
               this.bandData = res2.data.indicator;
               this.upperBand = this.bandData[2].slice(-1).pop();
               this.lowerBand = this.bandData[0].slice(-1).pop();
+              console.log("upperBand==>>", this.upperBand);
+              console.log("lowerBand==>>", this.lowerBand);
               this.rsi = res3.data.indicator[0].slice(-1).pop();
               this.macd = res4.data.indicator[0].slice(-1).pop();
               this.volume = res5.data.indicator[0].slice(-1).pop();

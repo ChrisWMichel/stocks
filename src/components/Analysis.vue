@@ -50,7 +50,7 @@
           <b-tbody>
             <b-tr>
               <b-th class="text-center">PRICE TO EARNINGS:</b-th>
-              <b-th class="text-left">{{ priceToEarnings }}</b-th>
+              <b-th class="text-left pr-5 pr-lg-0">{{ priceToEarnings }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">EBITDA RATING:</b-th>
