@@ -230,12 +230,6 @@ export default {
         this.$store.state.shortData =
           "This stock is currently at a great place to dip buy. This stock typically trends well so this is a great opportunity to get the stock at a great price.";
       }
-      console.log("===>", this.choppiness);
-      console.log("lb====================>>", this.lowerBand);
-      console.log("ub====================>>", this.upperBand);
-      console.log("h====================>>", this.devHigh);
-      console.log("l====================>>", this.devLow);
-      console.log("short======", this.$store.state.shortData);
     },
     startSetInterval() {
       setInterval(() => {
