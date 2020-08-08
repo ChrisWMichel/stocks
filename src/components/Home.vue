@@ -2,16 +2,13 @@
   <b-container>
     <b-row class="dropdown searchBox" style="margin-left: 12%"
       ><!--class="justify-content-md-center"-->
-      <b-col cols="7" lg="7" md="5" sm="7" style="padding-right: 0">
-
+      <b-col cols="8" lg="7" md="5" sm="7" style="padding-right: 0">
         <auto-search @getStock="getStock"></auto-search>
-
-
       </b-col>
       <!--<b-col cols="1" style="padding: 0">
         <button size="sm" class="" @click="clearData">Clear</button>
       </b-col>-->
-      <b-col cols="4" style="padding-left: 5%" class="top-label">
+      <b-col cols="4" style="padding-left: 20%" class="top-label">
         {{ getSockPrice || 0 | currency }}
       </b-col>
     </b-row>
@@ -24,7 +21,7 @@ import Chart from "./Chart";
 import AutoSearch from "@/components/AutoSearch";
 
 export default {
-   name: "Home",
+  name: "Home",
   components: {
     AutoSearch,
     Chart,
@@ -35,9 +32,9 @@ export default {
     };
   },
   methods: {
-     getStock(){
-        this.$refs.updateStock.updateStocks()
-     },
+    getStock() {
+      this.$refs.updateStock.updateStocks();
+    },
 
     clearData() {
       this.filterText = "";
@@ -46,7 +43,7 @@ export default {
       this.$store.state.symbol = "";
       this.$store.state.stockPrice = 0;
       this.$store.state.clearDataObj = true;
-      this.$refs.typeBox.focus()
+      this.$refs.typeBox.focus();
     },
   },
   computed: {
@@ -87,12 +84,12 @@ export default {
 }
 .searchBox {
   /*margin-left: 150px;*/
-  margin-top: 30px;
+  margin-top: 40px;
 
   font-size: 20px;
 }
 .chart {
-  margin-top: 30px;
+  margin-top: 10px;
   position: relative;
 }
 .top-label {

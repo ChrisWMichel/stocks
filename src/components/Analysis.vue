@@ -8,13 +8,7 @@
     </b-row>
     <b-row>
       <b-col>
-        <b-form-textarea
-          style="border: none"
-          id="textarea"
-          v-model="description"
-          rows="5"
-          class="m-auto"
-        ></b-form-textarea>
+        <h5 class="mx-3">{{ this.shortData }}</h5>
       </b-col>
     </b-row>
     <b-row style="display: flex;" class="pt-4">
@@ -29,19 +23,19 @@
           <b-tbody>
             <b-tr>
               <b-th class="text-center">TRENDING BAND:</b-th>
-              <b-th class="text-left">{{ financeData }}</b-th>
+              <b-th class="text-left">{{ this.band }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">RSI:</b-th>
-              <b-th class="text-left">{{ rsiData }}</b-th>
+              <b-th class="text-left">{{ this.rsiData }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">MACD:</b-th>
-              <b-th class="text-left">{{ macdData }}</b-th>
+              <b-th class="text-left">{{ this.macdData }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">VOLUME:</b-th>
-              <b-th class="text-left">{{ volumeData }}</b-th>
+              <b-th class="text-left">{{ this.volumeData }}</b-th>
             </b-tr>
           </b-tbody>
         </b-table-simple>
@@ -80,28 +74,31 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Analysis",
-  props: {
-    financeData: String,
-    rsiData: String,
-    macdData: String,
-    volumeData: String,
-  },
+  props: {},
   data() {
     return {
-      description:
-        "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-      trendingBand: "BULLISH",
-      rsi: "BULLISH",
-      macd: "BULLISH",
-      volume: "BULLISH",
+      description: this.shortData,
       priceToEarnings: "GOOD",
       ebitdaRating: "FAIR",
       priceToBookRatio: "GOOD",
       profitMargin: "LOW",
     };
   },
+  computed: {
+    ...mapGetters({
+      choppiness: "getChoppiness",
+      chopPct: "getChopPct",
+      band: "getBand",
+      rsiData: "getRsiData",
+      volumeData: "getVolumeData",
+      macdData: "getMacdData",
+      shortData: "getShortData",
+    }),
+  },
+  methods: {},
 };
 </script>
 
