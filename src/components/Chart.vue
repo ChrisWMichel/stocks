@@ -10,7 +10,7 @@
           symbol: stockSym,
           theme: 'light',
           interval: 'D',
-          width: 900,
+          width: '100%',
           allow_symbol_change: true,
         }"
       ></vue-trading-view>

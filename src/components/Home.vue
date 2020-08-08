@@ -1,15 +1,9 @@
 <template>
   <b-container>
-    <b-row class="dropdown searchBox" style="margin-left: 12%"
+    <b-row class="dropdown searchBox" style="margin-left: 25%"
       ><!--class="justify-content-md-center"-->
       <b-col cols="8" lg="7" md="5" sm="7" style="padding-right: 0">
         <auto-search @getStock="getStock"></auto-search>
-      </b-col>
-      <!--<b-col cols="1" style="padding: 0">
-        <button size="sm" class="" @click="clearData">Clear</button>
-      </b-col>-->
-      <b-col cols="4" style="padding-left: 20%" class="top-label">
-        {{ getSockPrice || 0 | currency }}
       </b-col>
     </b-row>
     <chart class="chart" ref="updateStock"></chart>

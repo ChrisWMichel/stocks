@@ -1,19 +1,18 @@
 <template>
   <b-container fluid class="text-center">
-    <!--justify-content-sm-center justify-content-md-center justify-content-lg-center-->
     <b-row>
-      <b-col md="12" class="p-3">
-        <h4>Description</h4>
+      <b-col lg="12" class="p-3 mt-4">
+        <h4 style="text-decoration:underline">SHORT DESCRIPTION</h4>
       </b-col>
     </b-row>
     <b-row>
-      <b-col>
-        <h5 class="mx-3">{{ this.shortData }}</h5>
+      <b-col class="pr-5 pl-5">
+        <h5 class="mx-5">{{ this.shortData }}</h5>
       </b-col>
     </b-row>
-    <b-row style="display: flex;" class="pt-4">
-      <b-col md="1"></b-col>
-      <b-col md="4" class="pr-5">
+    <b-row style="display: flex;" class="pt-5 pb-5">
+      <b-col lg="1"></b-col>
+      <b-col lg="4" class="pr-3">
         <b-table-simple hover small caption-top responsive>
           <b-thead head-variant="dark">
             <b-tr>
@@ -40,8 +39,8 @@
           </b-tbody>
         </b-table-simple>
       </b-col>
-      <b-col md="2"></b-col>
-      <b-col md="4">
+      <b-col lg="2"></b-col>
+      <b-col lg="4">
         <b-table-simple hover small caption-top responsive>
           <b-thead head-variant="dark">
             <b-tr>
@@ -68,7 +67,7 @@
           </b-tbody>
         </b-table-simple>
       </b-col>
-      <b-col md="1"></b-col>
+      <b-col lg="1"></b-col>
     </b-row>
   </b-container>
 </template>
