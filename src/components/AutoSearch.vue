@@ -10,10 +10,6 @@
       :getSuggestionValue="getSuggestionValue"
       @input="fetchResults"
     />
-    <!--<div v-if="selected" style="margin-top: 10px; display: flex;">
-        <p style="margin-right: 10px">You have selected:</p>
-        <h4 style="color: green">{{selected}}</h4>
-      </div>-->
   </div>
 </template>
 
@@ -120,6 +116,7 @@ export default {
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  text-align: center;
 }
 
 #autosuggest__input.autosuggest__input-open {
@@ -145,6 +142,7 @@ export default {
   padding: 0px;
   height: 200px;
   overflow-y: scroll;
+  text-align: center;
 }
 
 .autosuggest__results ul {
