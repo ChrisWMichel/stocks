@@ -148,14 +148,14 @@ export default {
                 this.$store.state.stockPrice * this.HV * Math.sqrt(5 / 253);
               this.midLine = res5.data.indicator[0].slice(-1).pop();
               this.upperBand = this.midLine + this.EM;
-              this.upperBand = this.midLine - this.EM;
+              this.lowerBand = this.midLine - this.EM;
               this.devHigh = this.midLine + 4 * this.EM;
               this.devLow = this.midLine - 4 * this.EM;
               this.peRatio = res7.data.peRatio;
               this.EBITDA = res7.data.EBITDA;
               this.priceToBook = res7.data.priceToBook;
               this.profitMargin = res7.data.profitMargin;
-              console.log("========>>>>>>", this.EBITDA);
+              console.log("========>>>>>>", this.upperBand);
             })
           );
       } catch (err) {
