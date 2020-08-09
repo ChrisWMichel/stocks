@@ -2,7 +2,7 @@
   <div>
     <div v-if="stockSym">
       <p style="color: white">
-        {{ updateStocks() }}
+        <!-- {{ updateStocks() }} -->
       </p>
       <vue-trading-view
         :key="stockSym"
@@ -100,12 +100,19 @@ export default {
       ebit: "getEbit",
     }),
   },
+  mounted() {
+    this.updateStocks();
+    setInterval(() => {
+      this.updateStocks();
+    }, 180000);
+  },
   methods: {
     getSubDate() {
       const subDays = moment().subtract(200, "days");
       return subDays.format("YYYYMMDD");
     },
     async updateStocks() {
+      console.log(1);
       if (!this.$store.state.clearDataObj) {
         return;
       }
@@ -275,11 +282,6 @@ export default {
       this.$store.state.ebit = "FAIR";
       this.$store.state.pb = "GOOD";
       this.$store.state.pm = "LOW";
-    },
-    startSetInterval() {
-      setInterval(() => {
-        this.updateStocks();
-      }, 32000);
     },
   },
 };
