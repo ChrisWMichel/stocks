@@ -17,7 +17,7 @@
     </div>
 
     <div v-if="stockSym">
-      <analysis :financeData="band"></analysis>
+      <analysis></analysis>
     </div>
   </div>
 </template>

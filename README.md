@@ -1,25 +1,7 @@
-# stocks
+# Stock Analysis
 
-## Project setup
-```
-npm install
-```
+#### Front-end web app
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-"# stocks" 
+- This app uses Vue.js and BootstrapVue
+- api's include IEXCloud and TreeView Chart
