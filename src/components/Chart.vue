@@ -61,6 +61,8 @@ export default {
       EBITDA: 0,
       peRatio: 0,
       midArray: {},
+      stopLoss: 0,
+      lossPrice: 0,
     };
   },
   computed: {
@@ -136,6 +138,8 @@ export default {
               this.bandData = res2.data.indicator;
               // this.upperBand = this.bandData[2].slice(-1).pop();
               // this.lowerBand = this.bandData[0].slice(-1).pop();
+              this.stopLoss = this.stockPrice - this.stockPrice * 0.96;
+              this.lossPrice = Math.round(this.stopLoss * 100) / 100;
               this.rsi = res3.data.indicator[0].slice(-1).pop();
               this.macd = res4.data.indicator[0].slice(-1).pop();
               this.volume = res5.data.indicator[0].slice(-1).pop();
@@ -208,15 +212,13 @@ export default {
         (this.choppiness = "No Choppiness") &&
         this.stockPrice > 0.01 * this.devHigh
       ) {
-        this.$store.state.shortData =
-          "This stock is in an uptrend and trends well. This should be a good buy if a stop loss is placed at roughly (stock price * .96).";
+        this.$store.state.shortData = `This stock is in an uptrend and trends well. This should be a good buy if a stop loss is placed at roughly (${this.lossPrice}).`;
       } else if (
         this.stockPrice > this.upperBand &&
         (this.choppiness = "Has Choppiness") &&
         this.stockPrice > 0.01 * this.devHigh
       ) {
-        this.$store.state.shortData =
-          "This stock is in an uptrend but performs best as a range bound stock. If you decide to buy now, then a stop loss should be placed at roughly (stock price * .96).";
+        this.$store.state.shortData = `This stock is in an uptrend but performs best as a range bound stock. If you decide to buy now, then a stop loss should be placed at roughly (${this.lossPrice}).`;
       } else if (
         this.stockPrice > this.upperBand &&
         (this.choppiness = "No Choppiness") &&
