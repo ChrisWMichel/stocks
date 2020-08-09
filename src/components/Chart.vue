@@ -68,6 +68,7 @@ export default {
       return this.$store.state.symbol;
     },
     ...mapActions([
+      "choppiness",
       "band",
       "rsidata",
       "volumeData",
@@ -96,7 +97,7 @@ export default {
   methods: {
     getSubDate(){
       const subDays = moment().subtract(200, 'days');
-      return moment().format("YYYYMMDD", subDays._d)
+      return subDays.format("YYYYMMDD")
     },
     async updateStocks() {
       if (!this.$store.state.clearDataObj) {
@@ -107,25 +108,25 @@ export default {
         await axios
           .all([
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/quote?token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/quote?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/bbands?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/bbands?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/${subDate}?token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/date/${subDate}?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
           ])
           .then(
@@ -163,6 +164,7 @@ export default {
               this.EBITDA = res7.data.EBITDA;
               this.priceToBook = res7.data.priceToBook;
               this.profitMargin = res7.data.profitMargin;
+              console.log('choppiness', this.choppiness)
             })
           );
       } catch (err) {
