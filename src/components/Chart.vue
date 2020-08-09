@@ -27,6 +27,7 @@ import VueTradingView from "vue-trading-view";
 import Analysis from "@/components/Analysis";
 import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
+import moment from 'moment'
 
 export default {
   name: "Chart",
@@ -93,10 +94,15 @@ export default {
     }),
   },
   methods: {
+    getSubDate(){
+      const subDays = moment().subtract(200, 'days');
+      return moment().format("YYYYMMDD", subDays._d)
+    },
     async updateStocks() {
       if (!this.$store.state.clearDataObj) {
         return;
       }
+      const subDate = this.getSubDate();
       try {
         await axios
           .all([
@@ -116,7 +122,7 @@ export default {
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=sk_9fea5a3a643e4dc3b771899b3a642177`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/${subDate}?token=sk_9fea5a3a643e4dc3b771899b3a642177`
             ),
             axios.get(
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=sk_9fea5a3a643e4dc3b771899b3a642177`
