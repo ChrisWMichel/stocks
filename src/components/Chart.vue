@@ -69,8 +69,15 @@ export default {
     stockSym() {
       return this.$store.state.symbol;
     },
+    choppiness:{
+      get(){
+        return this.$store.getters.getChoppiness
+      },
+      set(){
+
+      }
+    },
     ...mapActions([
-      "choppiness",
       "band",
       "rsidata",
       "volumeData",
@@ -82,7 +89,6 @@ export default {
       "ebit",
     ]),
     ...mapGetters({
-      choppiness: "getChoppiness",
       chopPct: "getChopPct",
       band: "getBand",
       rsiData: "getRsiData",
@@ -168,7 +174,6 @@ export default {
               this.EBITDA = res7.data.EBITDA;
               this.priceToBook = res7.data.priceToBook;
               this.profitMargin = res7.data.profitMargin;
-              console.log('choppiness', this.choppiness)
             })
           );
       } catch (err) {
