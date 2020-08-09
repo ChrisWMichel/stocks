@@ -7,7 +7,7 @@
     </b-row>
     <b-row>
       <b-col class="pr-5 pl-5">
-        <h5 class="mx-lg-5 mx-0">{{ this.shortData }}</h5>
+        <h5 class="mx-lg-5 mx-0">{{ shortData }}</h5>
       </b-col>
     </b-row>
     <b-row style="display: flex;" class="pt-5 pb-5">
@@ -22,19 +22,19 @@
           <b-tbody>
             <b-tr>
               <b-th class="text-center">TRENDING BAND:</b-th>
-              <b-th class="text-left">{{ this.band }}</b-th>
+              <b-th class="text-left">{{ band }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">RSI:</b-th>
-              <b-th class="text-left">{{ this.rsiData }}</b-th>
+              <b-th class="text-left">{{ rsiData }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">MACD:</b-th>
-              <b-th class="text-left">{{ this.macdData }}</b-th>
+              <b-th class="text-left">{{ macdData }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">VOLUME:</b-th>
-              <b-th class="text-left">{{ this.volumeData }}</b-th>
+              <b-th class="text-left">{{ volumeData }}</b-th>
             </b-tr>
           </b-tbody>
         </b-table-simple>
@@ -50,19 +50,19 @@
           <b-tbody>
             <b-tr>
               <b-th class="text-center">PRICE TO EARNINGS:</b-th>
-              <b-th class="text-left pr-4 pr-md-5 pr-lg-0">{{ this.pe }}</b-th>
+              <b-th class="text-left pr-4 pr-md-5 pr-lg-0">{{ pe }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">EBITDA RATING:</b-th>
-              <b-th class="text-left">{{ this.ebit }}</b-th>
+              <b-th class="text-left">{{ ebit }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">PRICE TO BOOK RATIO:</b-th>
-              <b-th class="text-left">{{ this.pb }}</b-th>
+              <b-th class="text-left">{{ pb }}</b-th>
             </b-tr>
             <b-tr>
               <b-th class="text-center">PROFIT MARGIN:</b-th>
-              <b-th class="text-left">{{ this.pm }}</b-th>
+              <b-th class="text-left">{{ pm }}</b-th>
             </b-tr>
           </b-tbody>
         </b-table-simple>
@@ -79,7 +79,7 @@ export default {
   props: {},
   data() {
     return {
-      description: this.shortData,
+
     };
   },
   computed: {
