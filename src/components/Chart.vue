@@ -59,6 +59,7 @@ export default {
       priceToBook: 0,
       EBITDA: 0,
       peRatio: 0,
+      midArray: {},
     };
   },
   computed: {
@@ -146,7 +147,8 @@ export default {
                 ((this.highPrice + this.lowPrice) / 2);
               this.EM =
                 this.$store.state.stockPrice * this.HV * Math.sqrt(5 / 253);
-              this.midLine = res5.data.indicator[0].slice(-1).pop();
+              this.midArray = res5.data.indicator[0].slice(-200);
+              this.midLine = eval(this.midArray.join("+")) / 200;
               this.upperBand = this.midLine + this.EM;
               this.lowerBand = this.midLine - this.EM;
               this.devHigh = this.midLine + 4 * this.EM;
@@ -155,7 +157,6 @@ export default {
               this.EBITDA = res7.data.EBITDA;
               this.priceToBook = res7.data.priceToBook;
               this.profitMargin = res7.data.profitMargin;
-              console.log("========>>>>>>", this.upperBand);
             })
           );
       } catch (err) {
