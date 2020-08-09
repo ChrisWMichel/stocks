@@ -27,7 +27,7 @@ import VueTradingView from "vue-trading-view";
 import Analysis from "@/components/Analysis";
 import { mapActions, mapGetters } from "vuex";
 import axios from "axios";
-import moment from 'moment'
+import moment from "moment";
 
 export default {
   name: "Chart",
@@ -69,13 +69,11 @@ export default {
     stockSym() {
       return this.$store.state.symbol;
     },
-    choppiness:{
-      get(){
-        return this.$store.getters.getChoppiness
+    choppiness: {
+      get() {
+        return this.$store.getters.getChoppiness;
       },
-      set(){
-
-      }
+      set() {},
     },
     ...mapActions([
       "band",
@@ -103,9 +101,9 @@ export default {
     }),
   },
   methods: {
-    getSubDate(){
-      const subDays = moment().subtract(200, 'days');
-      return subDays.format("YYYYMMDD")
+    getSubDate() {
+      const subDays = moment().subtract(200, "days");
+      return subDays.format("YYYYMMDD");
     },
     async updateStocks() {
       if (!this.$store.state.clearDataObj) {
@@ -131,7 +129,7 @@ export default {
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/date/${subDate}?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
             ),
             axios.get(
               `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
@@ -150,7 +148,8 @@ export default {
               this.macd = res4.data.indicator[0].slice(-1).pop();
               this.volume = res5.data.indicator[0].slice(-1).pop();
               this.$store.commit("calcChoppiness", res6.data);
-              this.priceData = res6.data;
+              this.priceData = res6.data.slice(-252);
+              console.log("p====>>>>>", this.priceData);
               this.highData = this.priceData.map((ele) => {
                 return ele.high;
               });
@@ -163,7 +162,7 @@ export default {
                 (this.highPrice - this.lowPrice) /
                 ((this.highPrice + this.lowPrice) / 2);
               this.EM =
-                this.$store.state.stockPrice * this.HV * Math.sqrt(5 / 253);
+                this.$store.state.stockPrice * this.HV * Math.sqrt(5 / 252);
               this.midArray = res5.data.indicator[0].slice(-200);
               this.midLine = eval(this.midArray.join("+")) / 200;
               this.upperBand = this.midLine + this.EM;
