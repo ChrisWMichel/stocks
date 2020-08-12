@@ -2,7 +2,7 @@
   <div>
     <div v-if="stockSym">
       <p style="color: white">
-        <!-- {{ updateStocks() }} -->
+        {{ updateStocks() }}
       </p>
       <vue-trading-view
         :key="stockSym"
@@ -100,8 +100,7 @@ export default {
       ebit: "getEbit",
     }),
   },
-  mounted() {
-    this.updateStocks();
+  created() {
     setInterval(() => {
       this.updateStocks();
     }, 180000);
