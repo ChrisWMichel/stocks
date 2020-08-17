@@ -120,25 +120,25 @@ export default {
         await axios
           .all([
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/quote?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/quote?token=`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/bbands?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/bbands?range=1y&token=`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/rsi?range=1y&token=`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/macd?range=1y&token=`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/indicator/sma?range=1y&token=`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/chart/1y?token=`
             ),
             axios.get(
-              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=pk_b126cb1ba8dc441aa3673f3ccb2a3ba5`
+              `https://cloud.iexapis.com/stable/stock/${this.$store.state.symbol}/advanced-stats?token=`
             ),
           ])
           .then(
